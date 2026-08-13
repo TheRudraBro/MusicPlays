@@ -1,24 +1,22 @@
-// এখানে আপনার গানের ক্যাটাগরি এবং ফাইলগুলো সাজানো আছে
-    const musicDatabase = {
+const musicDatabase = {
       "90s_hindi": [
-        { file: "90s_song1.mp3", title: "Pehla Nasha", artist: "90s Hindi Music" },
-        { file: "90s_song2.mp3", title: "Ek Ladki Ko Dekha", artist: "90s Hindi Music" }
+        { file: "90sHindi/ChuraKeDilMera.mp3", title: "Chura Ke Dil Mera", artist: "90s Hindi Music" }
+      ],
+      "90s_bangla": [
+        { file: "90sBangla/AgunerDinSheshHobe.mp3", title: "Aguner Din Shesh Hobe", artist: "90s Bangla Music" }
       ],
       "hindi_love": [
-        { file: "love_song1.mp3", title: "Tum Hi Ho", artist: "Hindi Love Songs" },
-        { file: "love_song2.mp3", title: "Raabta", artist: "Hindi Love Songs" }
+        { file: "LoveHindi/RimJhim.mp3", title: "Rim Jhim", artist: "Hindi Love Songs" }
       ],
       "hindi_sad": [
-        { file: "sad_song1.mp3", title: "Channa Mereya", artist: "Hindi Sad Songs" },
-        { file: "sad_song2.mp3", title: "Tujhe Bhula Diya", artist: "Hindi Sad Songs" }
+        { file: "SadHindi/BayaanNahinMilta.mp3", title: "Bayaan Nahin Milta", artist: "Hindi Sad Songs" }
       ],
       "bangla_band": [
-        { file: "band_song1.mp3", title: "Bhalobashi Jare", artist: "Bangla Band Music" },
-        { file: "band_song2.mp3", title: "Hasimukh", artist: "Bangla Band Music" }
+        { file: "BanglaBand/Mrigakkhi.mp3", title: "Mrigakkhi", artist: "Bangla Band Music" }
       ]
     };
 
-    let currentCategory = "90s_hindi"; // ডিফল্ট ক্যাটাগরি
+    let currentCategory = "90s_hindi"; 
     let playlist = musicDatabase[currentCategory]; 
     let currentIndex = 0;
     let isPlaying = false, seeking = false;
@@ -50,7 +48,6 @@
       $("songArtist").textContent = song.artist;
       $("miniTitle").textContent = song.title;
       
-      // ড্রপডাউন এর টেক্সট অনুযায়ী ক্যাটাগরি লেবেল আপডেট করা
       const select = $("categorySelect");
       $("currentCategoryLabel").textContent = select.options[select.selectedIndex].text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\s/g, ' ').trim();
     }
@@ -87,7 +84,7 @@
     function nextSong(autoplay = true) {
       if (!playlist.length) return;
       let next = currentIndex + 1;
-      if (next >= playlist.length) next = 0; // ক্যাটাগরির সব গান শেষ হলে আবার প্রথম গান
+      if (next >= playlist.length) next = 0; 
       selectSong(next, autoplay);
     }
 
@@ -102,12 +99,12 @@
     $("categorySelect").addEventListener("change", (e) => {
       currentCategory = e.target.value;
       playlist = musicDatabase[currentCategory];
-      currentIndex = 0; // নতুন ক্যাটাগরির প্রথম গান থেকে শুরু হবে
+      currentIndex = 0; 
       selectSong(0, true);
     });
 
     audioPlayer.addEventListener("error", () => {
-      $("formMessage").textContent = "অডিও ফাইলটি খুঁজে পাওয়া যায়নি! গানের নামগুলো চেক করুন।";
+      $("formMessage").textContent = "অডিও ফাইলটি খুঁজে পাওয়া যায়নি! ফোল্ডারের নাম এবং গানের নামগুলো চেক করুন।";
     });
 
     audioPlayer.addEventListener("play", () => setPlaying(true));

@@ -50,10 +50,11 @@
        <p class="text-xs font-bold uppercase tracking-[.3em]">Now threading</p>
        <h2 class="display mt-3 font-bold text-3xl">The Listening Deck</h2>
        
-       <!-- ক্যাটাগরি সিলেক্ট করার অপশন -->
+       <!-- ক্যাটাগরি সিলেক্ট করার অপশন আপডেট করা হয়েছে -->
        <div class="mt-6 flex justify-center">
         <select id="categorySelect" class="cursor-pointer appearance-none bg-[#4a1721] text-[#f5e6c7] border-2 border-[#d5a64e] rounded-md px-6 py-3 font-bold text-sm uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#eab84d]">
           <option value="90s_hindi">💿 90s Hindi Music</option>
+          <option value="90s_bangla">📼 90s Bangla Music</option>
           <option value="hindi_love">❤️ Hindi Love Songs</option>
           <option value="hindi_sad">🌧️ Hindi Sad Songs</option>
           <option value="bangla_band">🎸 Bangla Band Music</option>
@@ -82,14 +83,12 @@
          <span id="currentTime">0:00</span> <label class="sr-only" for="progressBar">Song progress</label> <input id="progressBar" class="w-full" type="range" min="0" max="100" value="0" step="0.1"> <span id="durationTime">0:00</span>
         </div>
         
-        <!-- কন্ট্রোল বাটন এরিয়া (শুধুমাত্র Back, Play/Pause, Next) -->
         <div class="mt-7 flex items-center justify-center gap-3">
          <button id="previousBtn" class="control" type="button" aria-label="Previous song"><i data-lucide="skip-back" width="20"></i></button> 
          <button id="playBtn" class="control primary" type="button" aria-label="Play or pause"><i id="playIcon" data-lucide="play" width="27"></i></button> 
          <button id="nextBtn" class="control" type="button" aria-label="Next song"><i data-lucide="skip-forward" width="20"></i></button>
         </div>
         
-        <!-- ভলিউম কন্ট্রোল -->
         <div class="mt-6 flex items-center justify-center gap-3">
          <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none" type="button" aria-label="Mute volume"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> <label class="sr-only" for="volumeBar">Volume</label> <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
         </div>
@@ -120,6 +119,8 @@
     <button id="miniNext" class="p-2 text-[#ffe8b6] outline-none" type="button"><i data-lucide="skip-forward" width="19"></i></button>
    </div>
   </aside>
+  
+  <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
   
   <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
 <script src="functionality/function.js"></script>
