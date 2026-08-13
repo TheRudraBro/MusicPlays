@@ -11,26 +11,27 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="styles/style.css">
  </head>
- <body data-template-id="__page-root">
-  <header class="sticky top-0 z-20 border-b border-[#d9a94a55] bg-[#260d12ee] backdrop-blur-md">
-   <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4" aria-label="Main navigation">
-  <a href="#home" data-template-id="nav-logo" class="canva-link display text-2xl font-bold tracking-tight">MusicPlays</a> <time id="bangladeshTime" class="text-sm font-semibold text-[#f5e6c7]">00:00</time>
+<body>
+ <header class="sticky top-0 z-20 border-b border-[#d9a94a55] bg-[#260d12ee] backdrop-blur-md">
+   <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+    <a href="#home" class="display text-2xl font-bold tracking-tight text-[#f5e6c7]">MusicPlays</a> 
+    <time id="bangladeshTime" class="text-sm font-semibold text-[#f5e6c7]">00:00</time>
    </nav>
   </header>
   
   <main>
-   <!-- <section id="home" class="hero-glow relative min-h-[calc(80*min(var(--vh,1vh),1vh))] overflow-hidden">
+   <section id="home" class="hero-glow relative min-h-[calc(80*min(var(--vh,1vh),1vh))] overflow-hidden">
     <div class="absolute inset-0 opacity-20">
-     <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2000&auto=format&fit=crop" data-template-id="hero-image" class="canva-image h-full w-full object-cover mix-blend-screen" loading="lazy" alt="Background">
+     <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2000&auto=format&fit=crop" class="h-full w-full object-cover mix-blend-screen" alt="Background">
     </div>
     <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.1fr_.9fr] lg:py-20">
      <div class="hero-copy">
-      <p data-template-id="hero-kicker" class="canva-text mb-5 text-xs font-bold uppercase tracking-[.34em]">A 90s Hindi listening room</p>
+      <p class="mb-5 text-xs font-bold uppercase tracking-[.34em]">A listening room</p>
       <div class="retro-rule mb-7 max-w-xs"></div>
-      <h1 data-template-id="hero-title" class="canva-text display flicker max-w-3xl font-bold leading-[.92]">MusicPlays</h1>
-      <p data-template-id="hero-subtitle" class="canva-text display mt-6 text-2xl italic text-[#f4ce75] md:text-3xl">“Press Play. Relive the 90s.”</p>
-      <p data-template-id="hero-description" class="canva-text mt-5 max-w-xl text-base leading-7 text-[#f8e7c9cc]">Your nostalgic destination for timeless Hindi melodies, warm cassette hiss, and late-night memories, Mixtape No. 90 — made for slow evenings</p>
-      <a data-template-id="hero-cta" class="canva-button mt-9 inline-flex items-center gap-3 rounded-sm px-6 py-4 font-bold shadow-xl transition hover:-translate-y-1" href="#player"> <i data-lucide="play" width="18"></i> </a>
+      <h1 class="display flicker max-w-3xl text-6xl md:text-8xl font-bold leading-[.92]">MusicPlays</h1>
+      <p class="display mt-6 text-2xl italic text-[#f4ce75] md:text-3xl">“Press Play. Relive the Memories.”</p>
+      <p class="mt-5 max-w-xl text-base leading-7 text-[#f8e7c9cc]">Select your mood, hit play, and let the nostalgia take over. No tracklists, just pure uninterrupted melodies.</p>
+      <a class="mt-9 inline-flex items-center gap-3 rounded-sm bg-[#eab84d] text-[#42131a] px-6 py-4 font-bold shadow-xl transition hover:-translate-y-1" href="#player"> <i data-lucide="headphones" width="18"></i> Listen Now </a>
      </div>
      <div class="cassette-wrap relative mx-auto w-full max-w-md rotate-[-4deg]">
       <div id="heroCassette" class="cassette">
@@ -38,16 +39,27 @@
        <div class="reel right"><span></span></div>
        <div class="absolute bottom-[10%] left-[24%] right-[24%] h-5 rounded-sm bg-[#321312]"></div>
       </div>
-      <p data-template-id="hero-tape-label" class="canva-text display mt-5 text-center text-lg italic text-[#efd28c]">Mixtape No. 90</p>
+      <p class="display mt-5 text-center text-lg italic text-[#efd28c]">Your Custom Mixtape</p>
      </div>
     </div>
-   </section> -->
+   </section>
 
    <section id="player" class="w-full bg-[#321016] px-5 py-16 md:px-8">
     <div class="mx-auto max-w-6xl">
      <div class="mb-9 text-center">
-       <p data-template-id="player-kicker" class="canva-text text-xs font-bold uppercase tracking-[.3em]">Now threading</p>
-       <h2 data-template-id="player-title" class="canva-text display mt-3 font-bold text-3xl">The Listening Deck</h2>
+       <p class="text-xs font-bold uppercase tracking-[.3em]">Now threading</p>
+       <h2 class="display mt-3 font-bold text-3xl">The Listening Deck</h2>
+       
+       <!-- ক্যাটাগরি সিলেক্ট করার অপশন -->
+       <div class="mt-6 flex justify-center">
+        <select id="categorySelect" class="cursor-pointer appearance-none bg-[#4a1721] text-[#f5e6c7] border-2 border-[#d5a64e] rounded-md px-6 py-3 font-bold text-sm uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#eab84d]">
+          <option value="90s_hindi">💿 90s Hindi Music</option>
+          <option value="hindi_love">❤️ Hindi Love Songs</option>
+          <option value="hindi_sad">🌧️ Hindi Sad Songs</option>
+          <option value="bangla_band">🎸 Bangla Band Music</option>
+        </select>
+       </div>
+
       </div>
      <div class="paper-panel rounded-xl p-4 md:p-7">
       <div class="grid gap-7 lg:grid-cols-[.78fr_1.22fr]">
@@ -57,10 +69,10 @@
         <div class="absolute bottom-[10%] left-[24%] right-[24%] h-5 rounded-sm bg-[#321312]"></div>
        </div>
        <div class="flex min-w-0 flex-col justify-center">
-        <p data-template-id="now-playing-label" class="canva-text text-xs font-bold uppercase tracking-[.25em]"></p>
+        <p class="text-xs font-bold uppercase tracking-[.25em] text-[#7a3624]" id="currentCategoryLabel">90s Hindi Music</p>
         <h3 id="songTitle" class="display mt-2 text-3xl font-bold leading-tight md:text-4xl">Loading tape…</h3>
         <p id="songArtist" class="mt-2 text-base font-semibold text-[#7a3624]">MusicPlays</p>
-        <p id="songAlbum" class="mt-1 text-sm text-[#5f4632]">Tonight’s Mixtape</p>
+        
         <div class="mt-6 flex items-center gap-3">
          <div id="visualizer" class="equalizer" aria-label="Audio visualizer" role="img">
           <span style="height:12px"></span><span style="height:22px"></span><span style="height:15px"></span><span style="height:25px"></span><span style="height:18px"></span><span style="height:10px"></span><span style="height:20px"></span>
@@ -69,11 +81,17 @@
         <div class="mt-5 flex items-center gap-3 text-xs font-bold tabular-nums text-[#633023]">
          <span id="currentTime">0:00</span> <label class="sr-only" for="progressBar">Song progress</label> <input id="progressBar" class="w-full" type="range" min="0" max="100" value="0" step="0.1"> <span id="durationTime">0:00</span>
         </div>
+        
+        <!-- কন্ট্রোল বাটন এরিয়া (শুধুমাত্র Back, Play/Pause, Next) -->
         <div class="mt-7 flex items-center justify-center gap-3">
-         <button id="shuffleBtn" class="control" type="button" aria-label="Toggle shuffle"><i data-lucide="shuffle" width="19"></i></button> <button id="previousBtn" class="control" type="button" aria-label="Previous song"><i data-lucide="skip-back" width="20"></i></button> <button id="playBtn" class="control primary" type="button" aria-label="Play or pause"><i id="playIcon" data-lucide="play" width="27"></i></button> <button id="nextBtn" class="control" type="button" aria-label="Next song"><i data-lucide="skip-forward" width="20"></i></button> <button id="repeatBtn" class="control" type="button" aria-label="Repeat mode off"><i id="repeatIcon" data-lucide="repeat" width="19"></i></button>
+         <button id="previousBtn" class="control" type="button" aria-label="Previous song"><i data-lucide="skip-back" width="20"></i></button> 
+         <button id="playBtn" class="control primary" type="button" aria-label="Play or pause"><i id="playIcon" data-lucide="play" width="27"></i></button> 
+         <button id="nextBtn" class="control" type="button" aria-label="Next song"><i data-lucide="skip-forward" width="20"></i></button>
         </div>
+        
+        <!-- ভলিউম কন্ট্রোল -->
         <div class="mt-6 flex items-center justify-center gap-3">
-         <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none focus:ring-2 focus:ring-[#8b3221]" type="button" aria-label="Mute volume"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> <label class="sr-only" for="volumeBar">Volume</label> <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
+         <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none" type="button" aria-label="Mute volume"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> <label class="sr-only" for="volumeBar">Volume</label> <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
         </div>
        </div>
       </div>
@@ -81,31 +99,14 @@
      <div id="formMessage" class="mt-4 text-center text-sm font-bold text-[#eab84d]"></div>
     </div>
    </section>
-
-   <!-- <section id="about" class="w-full bg-[#49131a] px-5 py-16 md:px-8">
-    <div class="mx-auto grid max-w-6xl items-center gap-9 md:grid-cols-2">
-     <img src="https://images.unsplash.com/photo-1519638831568-d9897f54ed69?q=80&w=1000&auto=format&fit=crop" data-template-id="about-image" class="canva-image h-72 w-full rounded-lg border-4 border-[#d5a64e] object-cover shadow-2xl" loading="lazy" alt="Retro Cassette">
-     <div>
-      <p data-template-id="about-kicker" class="canva-text text-xs font-bold uppercase tracking-[.3em]">The good old rewind</p>
-      <h2 data-template-id="about-title" class="canva-text display mt-3 font-bold text-3xl">Why MusicPlays?</h2>
-      <p data-template-id="about-text" class="canva-text mt-5 max-w-xl text-base leading-8 text-[#f7e7c8d9]">MusicPlays brings back the feeling of sitting beside a cassette player, waiting for your favourite Hindi melody to begin. It is a small listening room for the songs that still know the way home.</p>
-      <div class="retro-rule mt-8 max-w-sm"></div>
-     </div>
-    </div>
-   </section> -->
   </main>
   
-  <!-- <footer class="w-full bg-[#1b0a0b] px-5 py-10 text-center">
-   <p data-template-id="footer-brand" class="canva-text display text-2xl font-bold">MusicPlays</p>
-   <p data-template-id="footer-tagline" class="canva-text mt-2 text-sm text-[#efcb7f]">Press Play. Relive the 90s.</p>
-   <div class="mt-5 flex justify-center gap-5 text-sm font-bold">
-    <a data-template-id="footer-github" class="canva-link transition hover:text-[#eab84d]" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> 
-    <a data-template-id="footer-instagram" class="canva-link transition hover:text-[#eab84d]" href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a> 
-    <a data-template-id="footer-youtube" class="canva-link transition hover:text-[#eab84d]" href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
-   </div>
-  </footer> -->
+  <footer class="w-full bg-[#1b0a0b] px-5 py-10 text-center">
+   <p class="display text-2xl font-bold">MusicPlays</p>
+   <p class="mt-2 text-sm text-[#efcb7f]">Press Play. Relive the Memories.</p>
+  </footer>
 
-  <aside id="miniPlayer" class="mini-player fixed bottom-0 left-0 z-20 w-full border-t border-[#e5ba5b] bg-[#310d13f5] px-4 py-3 shadow-2xl backdrop-blur-md" aria-label="Mini player">
+  <aside id="miniPlayer" class="mini-player fixed bottom-0 left-0 z-20 w-full border-t border-[#e5ba5b] bg-[#310d13f5] px-4 py-3 shadow-2xl backdrop-blur-md">
    <div class="mx-auto flex max-w-6xl items-center gap-3">
     <div class="h-10 w-10 shrink-0 rounded border-2 border-[#eab84d] bg-[#b73827]"></div>
     <div class="mini-meta min-w-0 flex-1">
@@ -114,15 +115,13 @@
       <div id="miniProgress" class="h-full w-0 bg-[#eab84d]"></div>
      </div>
     </div>
-    <button id="miniPrevious" class="p-2 text-[#ffe8b6] focus:outline-none focus:ring-2 focus:ring-[#eab84d]" type="button" aria-label="Previous song"><i data-lucide="skip-back" width="19"></i></button> 
-    <button id="miniPlay" class="rounded-full bg-[#eab84d] p-2 text-[#401116] focus:outline-none focus:ring-2 focus:ring-white" type="button" aria-label="Play or pause"><i id="miniPlayIcon" data-lucide="play" width="19"></i></button> 
-    <button id="miniNext" class="p-2 text-[#ffe8b6] focus:outline-none focus:ring-2 focus:ring-[#eab84d]" type="button" aria-label="Next song"><i data-lucide="skip-forward" width="19"></i></button>
+    <button id="miniPrevious" class="p-2 text-[#ffe8b6] outline-none" type="button"><i data-lucide="skip-back" width="19"></i></button> 
+    <button id="miniPlay" class="rounded-full bg-[#eab84d] p-2 text-[#401116] outline-none" type="button"><i id="miniPlayIcon" data-lucide="play" width="19"></i></button> 
+    <button id="miniNext" class="p-2 text-[#ffe8b6] outline-none" type="button"><i data-lucide="skip-forward" width="19"></i></button>
    </div>
   </aside>
   
-  <!-- এই অডিও ট্যাগটি আপনার আগের কোডে মিসিং ছিল! -->
   <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
-
 <script src="functionality/function.js"></script>
  </body>
 </html>

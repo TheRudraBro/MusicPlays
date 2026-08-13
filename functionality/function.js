@@ -1,34 +1,29 @@
+// এখানে আপনার গানের ক্যাটাগরি এবং ফাইলগুলো সাজানো আছে
+    const musicDatabase = {
+      "90s_hindi": [
+        { file: "90s_song1.mp3", title: "Pehla Nasha", artist: "90s Hindi Music" },
+        { file: "90s_song2.mp3", title: "Ek Ladki Ko Dekha", artist: "90s Hindi Music" }
+      ],
+      "hindi_love": [
+        { file: "love_song1.mp3", title: "Tum Hi Ho", artist: "Hindi Love Songs" },
+        { file: "love_song2.mp3", title: "Raabta", artist: "Hindi Love Songs" }
+      ],
+      "hindi_sad": [
+        { file: "sad_song1.mp3", title: "Channa Mereya", artist: "Hindi Sad Songs" },
+        { file: "sad_song2.mp3", title: "Tujhe Bhula Diya", artist: "Hindi Sad Songs" }
+      ],
+      "bangla_band": [
+        { file: "band_song1.mp3", title: "Bhalobashi Jare", artist: "Bangla Band Music" },
+        { file: "band_song2.mp3", title: "Hasimukh", artist: "Bangla Band Music" }
+      ]
+    };
 
-    const STORAGE_KEY = "musicplays-retro-v2";
-    
-    // আপনার লোকাল song.mp3 ফাইল
-    const basePlaylist = [
-      { 
-        id: "song-1", 
-        file: "MusicPlays/song.mp3", 
-        title: "Bhalobashi Jare", 
-        artist: "Bangla Retro 2001", 
-        album: "Tonight’s Mixtape", 
-        duration: "—" 
-      },
-         { 
-        id: "song-2", 
-        file: "MusicPlays/song1.mp3", 
-        title: "Rim Jhim", 
-        artist: "Jubin Nautiyal", 
-        album: "Tonight’s Mixtape", 
-        duration: "—" 
-      }
-
-    ];
-
-    let playlist = basePlaylist; 
+    let currentCategory = "90s_hindi"; // ডিফল্ট ক্যাটাগরি
+    let playlist = musicDatabase[currentCategory]; 
     let currentIndex = 0;
     let isPlaying = false, seeking = false;
     let volume = 100;
     let muted = false;
-    let shuffle = false;
-    let repeatMode = "off";
     
     const audioPlayer = document.getElementById("audioPlayer");
     const $ = id => document.getElementById(id);
@@ -45,7 +40,6 @@
       $("playIcon").setAttribute("data-lucide", isPlaying ? "pause" : "play");
       $("miniPlayIcon").setAttribute("data-lucide", isPlaying ? "pause" : "play");
       $("muteIcon").setAttribute("data-lucide", muted || volume === 0 ? "volume-x" : "volume-2");
-      $("repeatIcon").setAttribute("data-lucide", repeatMode === "one" ? "repeat-1" : "repeat");
       lucide.createIcons();
     }
 
@@ -54,8 +48,11 @@
       if (!song) return;
       $("songTitle").textContent = song.title;
       $("songArtist").textContent = song.artist;
-      $("songAlbum").textContent = song.album;
       $("miniTitle").textContent = song.title;
+      
+      // ড্রপডাউন এর টেক্সট অনুযায়ী ক্যাটাগরি লেবেল আপডেট করা
+      const select = $("categorySelect");
+      $("currentCategoryLabel").textContent = select.options[select.selectedIndex].text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\s/g, ' ').trim();
     }
 
     function setPlaying(next) {
@@ -63,7 +60,7 @@
       $("playerCassette").classList.toggle("is-playing", isPlaying);
       $("heroCassette").classList.toggle("is-playing", isPlaying);
       $("visualizer").classList.toggle("active", isPlaying);
-      $("playState").textContent = isPlaying ? "Now playing" : "Paused";
+      $("playState").textContent = isPlaying ? "Playing" : "Paused";
       updateIcons();
     }
 
@@ -77,14 +74,12 @@
       const msgDiv = $("formMessage");
       if(msgDiv) msgDiv.textContent = ""; 
       
-      // ফাইল লোড করা
       audioPlayer.src = playlist[index].file;
       audioPlayer.load();
       
       if (autoplay) {
         audioPlayer.play().catch(e => {
             console.log("Play error:", e);
-            if(msgDiv) msgDiv.textContent = "Please disable IDM/Downloader extension if audio is not playing.";
         });
       }
     }
@@ -92,23 +87,27 @@
     function nextSong(autoplay = true) {
       if (!playlist.length) return;
       let next = currentIndex + 1;
-      if (next >= playlist.length) {
-        if (repeatMode === "all") next = 0;
-        else { setPlaying(false); return; }
-      }
+      if (next >= playlist.length) next = 0; // ক্যাটাগরির সব গান শেষ হলে আবার প্রথম গান
       selectSong(next, autoplay);
     }
 
     function previousSong() {
       if (audioPlayer.currentTime > 5) { audioPlayer.currentTime = 0; return; }
-      selectSong(0, true);
+      let prev = currentIndex - 1;
+      if (prev < 0) prev = playlist.length - 1;
+      selectSong(prev, true);
     }
 
-    // Error Handling
-    audioPlayer.addEventListener("error", (e) => {
-      const msgDiv = $("formMessage");
-      if(msgDiv) msgDiv.textContent = "অডিও ফাইলটি খুঁজে পাওয়া যায়নি! song.mp3 ফাইলটি HTML ফাইলের সাথেই রাখুন।";
-      console.error("Audio Load Error:", audioPlayer.error);
+    // Category Change Logic
+    $("categorySelect").addEventListener("change", (e) => {
+      currentCategory = e.target.value;
+      playlist = musicDatabase[currentCategory];
+      currentIndex = 0; // নতুন ক্যাটাগরির প্রথম গান থেকে শুরু হবে
+      selectSong(0, true);
+    });
+
+    audioPlayer.addEventListener("error", () => {
+      $("formMessage").textContent = "অডিও ফাইলটি খুঁজে পাওয়া যায়নি! গানের নামগুলো চেক করুন।";
     });
 
     audioPlayer.addEventListener("play", () => setPlaying(true));
@@ -125,17 +124,9 @@
       $("miniProgress").style.width = duration ? (current / duration * 100) + "%" : "0%";
     });
 
-    audioPlayer.addEventListener("ended", () => {
-      if (repeatMode === "one") { 
-        audioPlayer.currentTime = 0; 
-        audioPlayer.play(); 
-      } else { 
-        nextSong(true); 
-      }
-    });
+    audioPlayer.addEventListener("ended", () => nextSong(true));
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Force volume to 100% on start
       audioPlayer.volume = 1.0;
       audioPlayer.muted = false;
       $("volumeBar").value = 100; 
@@ -148,9 +139,7 @@
 
       audioPlayer.src = playlist[currentIndex].file;
 
-      $("playBtn").addEventListener("click", () => { isPlaying ? audioPlayer.pause() : audioPlayer.play().catch(e => {
-          $("formMessage").textContent = "ব্রাউজারের কোনো এক্সটেনশন (যেমন IDM) গানটি আটকে দিচ্ছে। এক্সটেনশন অফ করুন।";
-      }); });
+      $("playBtn").addEventListener("click", () => { isPlaying ? audioPlayer.pause() : audioPlayer.play(); });
       $("miniPlay").addEventListener("click", () => $("playBtn").click());
       $("nextBtn").addEventListener("click", () => nextSong(true));
       $("miniNext").addEventListener("click", () => nextSong(true));

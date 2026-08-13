@@ -1,5 +1,4 @@
-
-    :root { --wine:#4c1018; --ink:#21110d; --paper:#f5e6c7; --gold:#eab84d; --orange:#d85a2a; --wine2:#791b28; }
+:root { --wine:#4c1018; --ink:#21110d; --paper:#f5e6c7; --gold:#eab84d; --orange:#d85a2a; --wine2:#791b28; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; background:#24110f; color:var(--paper); font-family:"DM Sans",sans-serif; overflow-x:hidden; }
@@ -31,10 +30,6 @@
     .equalizer span:nth-child(2){animation-delay:-.3s}.equalizer span:nth-child(3){animation-delay:-.6s}.equalizer span:nth-child(4){animation-delay:-.15s}.equalizer span:nth-child(5){animation-delay:-.45s}.equalizer span:nth-child(6){animation-delay:-.2s}.equalizer span:nth-child(7){animation-delay:-.5s}
     .equalizer:not(.active) span { animation-play-state:paused; height:5px!important; }
     @keyframes bar { from{height:5px} to{height:26px} }
-    .playlist-card { border-left:4px solid transparent; transition:.2s; }
-    .playlist-card:hover { transform:translateX(4px); background:#f6e8cddd; }
-    .playlist-card.current { border-left-color:#c64226; background:#fff4d9; }
     .mini-player { transform:translateY(150%); transition:transform .35s ease; }
     .mini-player.visible { transform:translateY(0); }
     @media (max-width:640px) { .hero-copy { padding-top:4rem; } .cassette-wrap{max-width:290px;margin:auto} .mini-meta{max-width:120px} }
- 
