@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicPlays — Press Play. Relive the 90s.</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root { --wine:#4c1018; --ink:#21110d; --paper:#f5e6c7; --gold:#eab84d; --orange:#d85a2a; --wine2:#791b28; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:#24110f; color:var(--paper); font-family:"DM Sans",sans-serif; overflow-x:hidden; }
+    body::before { content:""; position:fixed; inset:0; z-index:30; pointer-events:none; opacity:.1; background-image:url("https://grainy-gradients.vercel.app/noise.svg"); mix-blend-mode:soft-light; }
+    .display { font-family:"Playfair Display",serif; }
+    .retro-rule { height:3px; background:linear-gradient(90deg,transparent,#eab84d 12%,#eab84d 88%,transparent); }
+    .paper-panel { background:linear-gradient(135deg,#f5e6c7,#ebd5ac); color:var(--ink); box-shadow:inset 0 0 0 2px #7c3c24,inset 0 0 0 7px #e8bd67,0 18px 40px #09030380; }
+    .hero-glow { background:radial-gradient(circle at 70% 42%,#d9603070 0,transparent 23%),radial-gradient(circle at 25% 80%,#eab84d30 0,transparent 30%),linear-gradient(112deg,#2a0c12 10%,#5e1722 59%,#190b0b); }
+    .nav-link { position:relative; color:#f5e6c7cc; transition:.2s; }
+    .nav-link:hover,.nav-link:focus { color:#eab84d; }
+    .nav-link::after { content:""; position:absolute; height:1px; background:#eab84d; width:0; left:0; bottom:-5px; transition:.2s; }
+    .nav-link:hover::after,.nav-link:focus::after { width:100%; }
+    .cassette { position:relative; background:linear-gradient(145deg,#d84f2b,#8a1c24 54%,#4e1016); border:7px solid #f3c55c; border-radius:16px; box-shadow:0 20px 36px #170507aa,inset 0 0 0 3px #511018; aspect-ratio:1.35; overflow:hidden; }
+    .cassette::before { content:""; position:absolute; inset:18% 10% 31%; background:#f2dca9; border:3px solid #5c211a; border-radius:5px; }
+    .cassette::after { content:"MUSICPLAYS  •  SIDE A"; position:absolute; top:27%; left:0; width:100%; text-align:center; color:#6b2020; font:700 10px "DM Sans"; letter-spacing:.16em; }
+    .reel { position:absolute; width:27%; aspect-ratio:1; top:43%; border-radius:50%; background:repeating-conic-gradient(#4d251d 0 10deg,#edbc53 10deg 19deg); border:7px solid #311514; box-shadow:0 0 0 3px #e9c365,inset 0 0 0 7px #562019; }
+    .reel.left { left:18%; }.reel.right { right:18%; }
+    .reel span { position:absolute; inset:35%; border-radius:50%; background:#e7d2a3; }
+    .is-playing .reel { animation:spin 1.65s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    @keyframes flicker { 0%,100%{opacity:1} 48%{opacity:.96} 50%{opacity:.9} 52%{opacity:.98} }
+    .flicker { animation:flicker 5s infinite; }
+    .control { width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid #926137; color:#f5e6c7; background:#40131a; transition:transform .2s,background .2s,color .2s; }
+    .control:hover,.control:focus { transform:translateY(-2px); background:#eab84d; color:#42131a; outline:2px solid #f5e6c7; outline-offset:3px; }
+    .control.primary { width:64px; height:64px; background:#eab84d; color:#42131a; border-color:#fff0bd; box-shadow:0 0 0 5px #eab84d25; }
+    input[type=range] { accent-color:#eab84d; cursor:pointer; }
+    .equalizer span { display:inline-block; width:5px; margin:0 2px; background:#eab84d; border-radius:3px; animation:bar 700ms ease-in-out infinite alternate; }
+    .equalizer span:nth-child(2){animation-delay:-.3s}.equalizer span:nth-child(3){animation-delay:-.6s}.equalizer span:nth-child(4){animation-delay:-.15s}.equalizer span:nth-child(5){animation-delay:-.45s}.equalizer span:nth-child(6){animation-delay:-.2s}.equalizer span:nth-child(7){animation-delay:-.5s}
+    .equalizer:not(.active) span { animation-play-state:paused; height:5px!important; }
+    @keyframes bar { from{height:5px} to{height:26px} }
+    .mini-player { transform:translateY(150%); transition:transform .35s ease; }
+    .mini-player.visible { transform:translateY(0); }
+    @media (max-width:640px) { .hero-copy { padding-top:4rem; } .cassette-wrap{max-width:290px;margin:auto} }
+  </style>
+ </head>
+ <body>
+  
+  <!-- Navbar Section -->
+  <header class="sticky top-0 z-20 border-b border-[#d9a94a55] bg-[#260d12ee] backdrop-blur-md">
+   <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+    <a href="#home" class="display text-2xl font-bold tracking-tight text-[#f5e6c7]">MusicPlays</a> 
+    
+    <div class="flex items-center gap-4 sm:gap-6">
+     <a href="https://instagram.com/rudranaldo" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#f5e6c7cc] hover:text-[#eab84d] transition-colors" title="Instagram">
+      <i data-lucide="instagram" width="22"></i>
+      <span class="hidden sm:block text-sm font-bold tracking-wide">rudranaldo</span>
+     </a>
+     
+     <a href="https://github.com/TheRudraBro" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#f5e6c7cc] hover:text-[#eab84d] transition-colors" title="GitHub">
+      <i data-lucide="github" width="22"></i>
+      <span class="hidden sm:block text-sm font-bold tracking-wide">TheRudraBro</span>
+     </a>
+     
+     <span class="hidden sm:block h-5 w-px bg-[#d9a94a55]"></span>
+     
+     <time id="bangladeshTime" class="text-sm font-semibold text-[#f5e6c7] tracking-widest">00:00</time>
+    </div>
+   </nav>
+  </header>
+  
+  <main>
+   <!-- Hero Section -->
+   <section id="home" class="hero-glow relative min-h-[calc(80*min(var(--vh,1vh),1vh))] overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+     <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2000&auto=format&fit=crop" class="h-full w-full object-cover mix-blend-screen" alt="Background">
+    </div>
+    <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1.1fr_.9fr] lg:py-20">
+     <div class="hero-copy">
+      <p class="mb-5 text-xs font-bold uppercase tracking-[.34em]">A listening room</p>
+      <div class="retro-rule mb-7 max-w-xs"></div>
+      <h1 class="display flicker max-w-3xl text-6xl md:text-8xl font-bold leading-[.92]">MusicPlays</h1>
+      <p class="display mt-6 text-2xl italic text-[#f4ce75] md:text-3xl">“Press Play. Relive the Memories.”</p>
+      <p class="mt-5 max-w-xl text-base leading-7 text-[#f8e7c9cc]">Select your mood, hit play, and let the nostalgia take over. No tracklists, just pure uninterrupted melodies.</p>
+      <a class="mt-9 inline-flex items-center gap-3 rounded-sm bg-[#eab84d] text-[#42131a] px-6 py-4 font-bold shadow-xl transition hover:-translate-y-1" href="#player"> <i data-lucide="headphones" width="18"></i> Listen Now </a>
+     </div>
+     <div class="cassette-wrap relative mx-auto w-full max-w-md rotate-[-4deg]">
+      <div id="heroCassette" class="cassette">
+       <div class="reel left"><span></span></div>
+       <div class="reel right"><span></span></div>
+       <div class="absolute bottom-[10%] left-[24%] right-[24%] h-5 rounded-sm bg-[#321312]"></div>
+      </div>
+      <p class="display mt-5 text-center text-lg italic text-[#efd28c]">Your Custom Mixtape</p>
+     </div>
+    </div>
+   </section>
+
+   <!-- Player Section -->
+   <section id="player" class="w-full bg-[#321016] px-5 py-16 md:px-8">
+    <div class="mx-auto max-w-6xl">
+     <div class="mb-9 text-center">
+       <p class="text-xs font-bold uppercase tracking-[.3em]">Now threading</p>
+       <h2 class="display mt-3 font-bold text-3xl">The Listening Deck</h2>
+       
+       <!-- ক্যাটাগরি ড্রপডাউনে ভোজপুরি যুক্ত করা হয়েছে -->
+       <div class="mt-6 flex justify-center">
+        <select id="categorySelect" class="cursor-pointer appearance-none bg-[#4a1721] text-[#f5e6c7] border-2 border-[#d5a64e] rounded-md px-6 py-3 font-bold text-sm uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#eab84d]">
+          <option value="90s_hindi">💿 90s Hindi Music</option>
+          <option value="90s_bangla">📼 90s Bangla Music</option>
+          <option value="hindi_love">❤️ Hindi Love Songs</option>
+          <option value="hindi_sad">🌧️ Hindi Sad Songs</option>
+          <option value="bangla_band">🎸 Bangla Band Music</option>
+          <option value="bhojpuri">💃 Bhojpuri Music</option>
+        </select>
+       </div>
+      </div>
+      
+     <div class="paper-panel rounded-xl p-4 md:p-7">
+      <div class="grid gap-7 lg:grid-cols-[.78fr_1.22fr]">
+       <div id="playerCassette" class="cassette self-center">
+        <div class="reel left"><span></span></div>
+        <div class="reel right"><span></span></div>
+        <div class="absolute bottom-[10%] left-[24%] right-[24%] h-5 rounded-sm bg-[#321312]"></div>
+       </div>
+       <div class="flex min-w-0 flex-col justify-center">
+        <p class="text-xs font-bold uppercase tracking-[.25em] text-[#7a3624]" id="currentCategoryLabel">90s Hindi Music</p>
+        <h3 id="songTitle" class="display mt-2 text-3xl font-bold leading-tight md:text-4xl">Loading tape…</h3>
+        <p id="songArtist" class="mt-2 text-base font-semibold text-[#7a3624]">MusicPlays</p>
+        
+        <div class="mt-6 flex items-center gap-3">
+         <div id="visualizer" class="equalizer" aria-label="Audio visualizer" role="img">
+          <span style="height:12px"></span><span style="height:22px"></span><span style="height:15px"></span><span style="height:25px"></span><span style="height:18px"></span><span style="height:10px"></span><span style="height:20px"></span>
+         </div><span id="playState" class="text-xs font-bold uppercase tracking-[.18em] text-[#873324]">Paused</span>
+        </div>
+        
+        <div class="mt-5 flex items-center gap-3 text-xs font-bold tabular-nums text-[#633023]">
+         <span id="currentTime">0:00</span> <input id="progressBar" class="w-full" type="range" min="0" max="100" value="0" step="0.1"> <span id="durationTime">0:00</span>
+        </div>
+        
+        <div class="mt-7 flex items-center justify-center gap-3">
+         <button id="previousBtn" class="control" type="button"><i data-lucide="skip-back" width="20"></i></button> 
+         <button id="playBtn" class="control primary" type="button"><i id="playIcon" data-lucide="play" width="27"></i></button> 
+         <button id="nextBtn" class="control" type="button"><i data-lucide="skip-forward" width="20"></i></button>
+        </div>
+        
+        <div class="mt-6 flex items-center justify-center gap-3">
+         <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none" type="button"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="formMessage" class="mt-4 text-center text-sm font-bold text-[#eab84d]"></div>
+    </div>
+   </section>
+  </main>
+  
+  <!-- Footer Section -->
+  <footer class="w-full bg-[#1b0a0b] px-5 py-10 text-center">
+   <p class="display text-2xl font-bold">MusicPlays</p>
+   <p class="mt-2 text-sm text-[#efcb7f]">Press Play. Relive the Memories.</p>
+   
+   <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 text-sm font-bold text-[#f5e6c7cc]">
+    <a href="https://github.com/TheRudraBro" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[#eab84d] transition-colors">
+      <i data-lucide="github" width="20"></i> TheRudraBro
+    </a> 
+    <a href="https://instagram.com/rudranaldo" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[#eab84d] transition-colors">
+      <i data-lucide="instagram" width="20"></i> rudranaldo
+    </a> 
+   </div>
+  </footer>
+
+  <!-- Mini Player -->
+  <aside id="miniPlayer" class="mini-player fixed bottom-0 left-0 z-20 w-full border-t border-[#e5ba5b] bg-[#310d13f5] px-4 py-3 shadow-2xl backdrop-blur-md">
+   <div class="mx-auto flex max-w-6xl items-center gap-3">
+    <div class="h-10 w-10 shrink-0 rounded border-2 border-[#eab84d] bg-[#b73827]"></div>
+    <div class="min-w-0 flex-1">
+     <p id="miniTitle" class="truncate text-sm font-bold text-[#ffe8b6]">MusicPlays</p>
+     <div class="mt-1 h-1 w-full overflow-hidden rounded bg-[#f5e6c744]">
+      <div id="miniProgress" class="h-full w-0 bg-[#eab84d]"></div>
+     </div>
+    </div>
+    <button id="miniPrevious" class="p-2 text-[#ffe8b6] outline-none" type="button"><i data-lucide="skip-back" width="19"></i></button> 
+    <button id="miniPlay" class="rounded-full bg-[#eab84d] p-2 text-[#401116] outline-none" type="button"><i id="miniPlayIcon" data-lucide="play" width="19"></i></button> 
+    <button id="miniNext" class="p-2 text-[#ffe8b6] outline-none" type="button"><i data-lucide="skip-forward" width="19"></i></button>
+   </div>
+  </aside>
+  
+  <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
+
+<script>
+    const musicDatabase = {
+      "90s_hindi": [
+        { file: "90sHindi/ChuraKeDilMera.mp3", title: "Chura Ke Dil Mera", artist: "90s Hindi Music" }
+      ],
+      "90s_bangla": [
+        { file: "90sBangla/AgunerDinSheshHobe.mp3", title: "Aguner Din Shesh Hobe", artist: "90s Bangla Music" }
+      ],
+      "hindi_love": [
+        { file: "LoveHindi/RimJhim.mp3", title: "Rim Jhim", artist: "Hindi Love Songs" }
+      ],
+      "hindi_sad": [
+        { file: "SadHindi/BayaanNahinMilta.mp3", title: "Bayaan Nahin Milta", artist: "Hindi Sad Songs" }
+      ],
+      "bangla_band": [
+        { file: "BanglaBand/Mrigakkhi.mp3", title: "Mrigakkhi", artist: "Bangla Band Music" }
+      ],
+      "bhojpuri": [
+        // এখানে ভোজপুরি গানের ডেমো ফাইল দেয়া হলো, আপনার গানের আসল নাম দিয়ে পরিবর্তন করে নিতে পারবেন
+        { file: "Bhojpuri/Song1.mp3", title: "Bhojpuri Hit 1", artist: "Bhojpuri Music" }
+      ]
+    };
+
+    let currentCategory = "90s_hindi"; 
+    let playlist = musicDatabase[currentCategory]; 
+    let currentIndex = 0;
+    let isPlaying = false, seeking = false;
+    let volume = 100;
+    let muted = false;
+    
+    const audioPlayer = document.getElementById("audioPlayer");
+    const $ = id => document.getElementById(id);
+    
+    const formatTime = seconds => {
+      if (isNaN(seconds)) return "0:00";
+      seconds = Number(seconds) || 0;
+      return Math.floor(seconds / 60) + ":" + String(Math.floor(seconds % 60)).padStart(2,"0");
+    };
+    
+    function getSong() { return playlist[currentIndex]; }
+
+    function updateIcons() {
+      $("playIcon").setAttribute("data-lucide", isPlaying ? "pause" : "play");
+      $("miniPlayIcon").setAttribute("data-lucide", isPlaying ? "pause" : "play");
+      $("muteIcon").setAttribute("data-lucide", muted || volume === 0 ? "volume-x" : "volume-2");
+      lucide.createIcons();
+    }
+
+    function updateSongDisplay() {
+      const song = getSong();
+      if (!song) return;
+      $("songTitle").textContent = song.title;
+      $("songArtist").textContent = song.artist;
+      $("miniTitle").textContent = song.title;
+      
+      const select = $("categorySelect");
+      $("currentCategoryLabel").textContent = select.options[select.selectedIndex].text.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|\s/g, ' ').trim();
+    }
+
+    function setPlaying(next) {
+      isPlaying = next;
+      $("playerCassette").classList.toggle("is-playing", isPlaying);
+      $("heroCassette").classList.toggle("is-playing", isPlaying);
+      $("visualizer").classList.toggle("active", isPlaying);
+      $("playState").textContent = isPlaying ? "Playing" : "Paused";
+      updateIcons();
+    }
+
+    function selectSong(index, autoplay) {
+      if (index < 0 || index >= playlist.length) return;
+      currentIndex = index;
+      updateSongDisplay();
+      $("progressBar").value = 0; 
+      $("currentTime").textContent = "0:00";
+      
+      const msgDiv = $("formMessage");
+      if(msgDiv) msgDiv.textContent = ""; 
+      
+      audioPlayer.src = playlist[index].file;
+      audioPlayer.load();
+      
+      if (autoplay) {
+        audioPlayer.play().catch(e => {
+            console.log("Play error:", e);
+        });
+      }
+    }
+
+    function nextSong(autoplay = true) {
+      if (!playlist.length) return;
+      let next = currentIndex + 1;
+      if (next >= playlist.length) next = 0; 
+      selectSong(next, autoplay);
+    }
+
+    function previousSong() {
+      if (audioPlayer.currentTime > 5) { audioPlayer.currentTime = 0; return; }
+      let prev = currentIndex - 1;
+      if (prev < 0) prev = playlist.length - 1;
+      selectSong(prev, true);
+    }
+
+    $("categorySelect").addEventListener("change", (e) => {
+      currentCategory = e.target.value;
+      playlist = musicDatabase[currentCategory];
+      currentIndex = 0; 
+      selectSong(0, true);
+    });
+
+    audioPlayer.addEventListener("error", () => {
+      $("formMessage").textContent = "অডিও ফাইলটি খুঁজে পাওয়া যায়নি! ফোল্ডারের নাম এবং গানের নামগুলো চেক করুন।";
+    });
+
+    audioPlayer.addEventListener("play", () => setPlaying(true));
+    audioPlayer.addEventListener("pause", () => setPlaying(false));
+    
+    audioPlayer.addEventListener("timeupdate", () => {
+      if (seeking) return;
+      const current = audioPlayer.currentTime || 0;
+      const duration = audioPlayer.duration || 0;
+      $("currentTime").textContent = formatTime(current);
+      if(duration) $("durationTime").textContent = formatTime(duration);
+      $("progressBar").max = duration || 100;
+      $("progressBar").value = current;
+      $("miniProgress").style.width = duration ? (current / duration * 100) + "%" : "0%";
+    });
+
+    audioPlayer.addEventListener("ended", () => nextSong(true));
+
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      
+      audioPlayer.volume = 1.0;
+      audioPlayer.muted = false;
+      $("volumeBar").value = 100; 
+      $("volumeText").textContent = "100%";
+      
+      updateSongDisplay(); 
+      updateBangladeshTime();
+      setInterval(updateBangladeshTime, 60000);
+
+      audioPlayer.src = playlist[currentIndex].file;
+
+      $("playBtn").addEventListener("click", () => { isPlaying ? audioPlayer.pause() : audioPlayer.play(); });
+      $("miniPlay").addEventListener("click", () => $("playBtn").click());
+      $("nextBtn").addEventListener("click", () => nextSong(true));
+      $("miniNext").addEventListener("click", () => nextSong(true));
+      $("previousBtn").addEventListener("click", previousSong);
+      $("miniPrevious").addEventListener("click", previousSong);
+
+      $("progressBar").addEventListener("input", () => { 
+        seeking = true; 
+        $("currentTime").textContent = formatTime($("progressBar").value); 
+      });
+      $("progressBar").addEventListener("change", () => { 
+        audioPlayer.currentTime = Number($("progressBar").value); 
+        seeking = false; 
+      });
+      
+      $("volumeBar").addEventListener("input", event => {
+        volume = Number(event.target.value); 
+        muted = volume === 0;
+        $("volumeText").textContent = volume + "%";
+        audioPlayer.volume = volume / 100;
+        audioPlayer.muted = muted;
+        updateIcons();
+      });
+      
+      $("muteBtn").addEventListener("click", () => {
+        muted = !muted;
+        audioPlayer.muted = muted;
+        updateIcons();
+      });
+
+      const hero = document.getElementById("home");
+      const observer = new IntersectionObserver(entries => $("miniPlayer").classList.toggle("visible", !entries[0].isIntersecting), { threshold:.2 });
+      if(hero) observer.observe(hero);
+    });
+
+    function updateBangladeshTime() {
+      const now = new Date();
+      const bdHours = (now.getUTCHours() + 6) % 24;
+      const bdTime = String(bdHours).padStart(2, '0') + ':' + String(now.getUTCMinutes()).padStart(2, '0');
+      const timeEl = $("bangladeshTime");
+      if (timeEl) timeEl.textContent = bdTime;
+    }
+  </script>
+ </body>
+</html>

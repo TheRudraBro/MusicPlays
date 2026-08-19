@@ -1,25 +1,44 @@
 <!doctype html>
 <html lang="en">
- <head>
-  <script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260811-05-f555caa","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Canva Sans":"YAFLd8sKbwc,2","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YAFdJksXcAk,0","Libre Baskerville":"YACgEUFdPdA,0","Manrope":"YAHO2b2feC4,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YADLjI9qxTA,0","Nunito":"YACgEX8C5Gg,0","Oleo Script":"YACgEQQ14jI,0","Phantom Sans":"YAHO2E8Pb88,0","Playfair Display":"YACgEYmuCJE,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YADWjpfPmdk,0","Raleway":"YACgEVg3xZg,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Spectral":"YAHO2rVUHIM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Ubuntu":"YACgERDU--Q,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YADlN8CFZ8Q,0","ui-sans-serif":"YACkoN-xg4g,0"}}');</script>
-  <script src="/_sdk/7949ff62d67710d5.telemetry_sdk.js" integrity="sha512-KIvXA82Di44YY/RH9/63A9MuTuavYgDFG8PfErJn7Wli4K0LAOk+coo/aPXk3+ZNL96nHh9VYD4PE+fLes+laQ=="></script>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MusicPlays — Relive the 90s</title>
+  <title>MusicPlays — Press Play. Relive the 90s.</title>
+  
+  <!-- External Libraries -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="styles/style.css">
- </head>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles/style.css">
+</head>
 <body>
- <header class="sticky top-0 z-20 border-b border-[#d9a94a55] bg-[#260d12ee] backdrop-blur-md">
+  
+  <!-- Navbar Section -->
+  <header class="sticky top-0 z-20 border-b border-[#d9a94a55] bg-[#260d12ee] backdrop-blur-md">
    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
     <a href="#home" class="display text-2xl font-bold tracking-tight text-[#f5e6c7]">MusicPlays</a> 
-    <time id="bangladeshTime" class="text-sm font-semibold text-[#f5e6c7]">00:00</time>
+    
+    <div class="flex items-center gap-4 sm:gap-6">
+     <a href="https://instagram.com/rudranaldo" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#f5e6c7cc] hover:text-[#eab84d] transition-colors" title="Instagram">
+      <i data-lucide="instagram" width="22"></i>
+      <span class="hidden sm:block text-sm font-bold tracking-wide">rudranaldo</span>
+     </a>
+     
+     <a href="https://github.com/TheRudraBro" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#f5e6c7cc] hover:text-[#eab84d] transition-colors" title="GitHub">
+      <i data-lucide="github" width="22"></i>
+      <span class="hidden sm:block text-sm font-bold tracking-wide">TheRudraBro</span>
+     </a>
+     
+     <span class="hidden sm:block h-5 w-px bg-[#d9a94a55]"></span>
+     <time id="bangladeshTime" class="text-sm font-semibold text-[#f5e6c7] tracking-widest">00:00</time>
+    </div>
    </nav>
   </header>
   
   <main>
+   <!-- Hero Section -->
    <section id="home" class="hero-glow relative min-h-[calc(80*min(var(--vh,1vh),1vh))] overflow-hidden">
     <div class="absolute inset-0 opacity-20">
      <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2000&auto=format&fit=crop" class="h-full w-full object-cover mix-blend-screen" alt="Background">
@@ -44,13 +63,13 @@
     </div>
    </section>
 
+   <!-- Player Section -->
    <section id="player" class="w-full bg-[#321016] px-5 py-16 md:px-8">
     <div class="mx-auto max-w-6xl">
      <div class="mb-9 text-center">
        <p class="text-xs font-bold uppercase tracking-[.3em]">Now threading</p>
        <h2 class="display mt-3 font-bold text-3xl">The Listening Deck</h2>
        
-       <!-- ক্যাটাগরি সিলেক্ট করার অপশন আপডেট করা হয়েছে -->
        <div class="mt-6 flex justify-center">
         <select id="categorySelect" class="cursor-pointer appearance-none bg-[#4a1721] text-[#f5e6c7] border-2 border-[#d5a64e] rounded-md px-6 py-3 font-bold text-sm uppercase tracking-wider outline-none focus:ring-2 focus:ring-[#eab84d]">
           <option value="90s_hindi">💿 90s Hindi Music</option>
@@ -58,10 +77,11 @@
           <option value="hindi_love">❤️ Hindi Love Songs</option>
           <option value="hindi_sad">🌧️ Hindi Sad Songs</option>
           <option value="bangla_band">🎸 Bangla Band Music</option>
+          <option value="bhojpuri">💃 Bhojpuri Music</option>
         </select>
        </div>
-
       </div>
+      
      <div class="paper-panel rounded-xl p-4 md:p-7">
       <div class="grid gap-7 lg:grid-cols-[.78fr_1.22fr]">
        <div id="playerCassette" class="cassette self-center">
@@ -79,18 +99,21 @@
           <span style="height:12px"></span><span style="height:22px"></span><span style="height:15px"></span><span style="height:25px"></span><span style="height:18px"></span><span style="height:10px"></span><span style="height:20px"></span>
          </div><span id="playState" class="text-xs font-bold uppercase tracking-[.18em] text-[#873324]">Paused</span>
         </div>
+        
         <div class="mt-5 flex items-center gap-3 text-xs font-bold tabular-nums text-[#633023]">
-         <span id="currentTime">0:00</span> <label class="sr-only" for="progressBar">Song progress</label> <input id="progressBar" class="w-full" type="range" min="0" max="100" value="0" step="0.1"> <span id="durationTime">0:00</span>
+         <span id="currentTime">0:00</span> <input id="progressBar" class="w-full" type="range" min="0" max="100" value="0" step="0.1"> <span id="durationTime">0:00</span>
         </div>
         
         <div class="mt-7 flex items-center justify-center gap-3">
-         <button id="previousBtn" class="control" type="button" aria-label="Previous song"><i data-lucide="skip-back" width="20"></i></button> 
-         <button id="playBtn" class="control primary" type="button" aria-label="Play or pause"><i id="playIcon" data-lucide="play" width="27"></i></button> 
-         <button id="nextBtn" class="control" type="button" aria-label="Next song"><i data-lucide="skip-forward" width="20"></i></button>
+         <button id="previousBtn" class="control" type="button"><i data-lucide="skip-back" width="20"></i></button> 
+         <button id="playBtn" class="control primary" type="button"><i id="playIcon" data-lucide="play" width="27"></i></button> 
+         <button id="nextBtn" class="control" type="button"><i data-lucide="skip-forward" width="20"></i></button>
         </div>
         
         <div class="mt-6 flex items-center justify-center gap-3">
-         <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none" type="button" aria-label="Mute volume"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> <label class="sr-only" for="volumeBar">Volume</label> <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
+         <button id="muteBtn" class="rounded p-2 text-[#693220] hover:bg-[#d9b97888] focus:outline-none" type="button"><i id="muteIcon" data-lucide="volume-2" width="19"></i></button> 
+         <input id="volumeBar" class="w-40 max-w-[55vw]" type="range" min="0" max="100" value="100"> 
+         <span id="volumeText" class="w-9 text-xs font-bold text-[#693220]">100%</span>
         </div>
        </div>
       </div>
@@ -100,15 +123,26 @@
    </section>
   </main>
   
+  <!-- Footer Section -->
   <footer class="w-full bg-[#1b0a0b] px-5 py-10 text-center">
    <p class="display text-2xl font-bold">MusicPlays</p>
    <p class="mt-2 text-sm text-[#efcb7f]">Press Play. Relive the Memories.</p>
+   
+   <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 text-sm font-bold text-[#f5e6c7cc]">
+    <a href="https://github.com/TheRudraBro" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[#eab84d] transition-colors">
+      <i data-lucide="github" width="20"></i> TheRudraBro
+    </a> 
+    <a href="https://instagram.com/rudranaldo" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:text-[#eab84d] transition-colors">
+      <i data-lucide="instagram" width="20"></i> rudranaldo
+    </a> 
+   </div>
   </footer>
 
+  <!-- Mini Player -->
   <aside id="miniPlayer" class="mini-player fixed bottom-0 left-0 z-20 w-full border-t border-[#e5ba5b] bg-[#310d13f5] px-4 py-3 shadow-2xl backdrop-blur-md">
    <div class="mx-auto flex max-w-6xl items-center gap-3">
     <div class="h-10 w-10 shrink-0 rounded border-2 border-[#eab84d] bg-[#b73827]"></div>
-    <div class="mini-meta min-w-0 flex-1">
+    <div class="min-w-0 flex-1">
      <p id="miniTitle" class="truncate text-sm font-bold text-[#ffe8b6]">MusicPlays</p>
      <div class="mt-1 h-1 w-full overflow-hidden rounded bg-[#f5e6c744]">
       <div id="miniProgress" class="h-full w-0 bg-[#eab84d]"></div>
@@ -121,8 +155,8 @@
   </aside>
   
   <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
-  
-  <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
-<script src="functionality/function.js"></script>
- </body>
+
+  <!-- Custom JavaScript -->
+  <script src="functionality/function.js"></script>
+</body>
 </html>
